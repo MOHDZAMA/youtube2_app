@@ -1,26 +1,26 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
+import {ModalProvider} from './src/context/Contex';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Home from './src/screens/Home';
-import Watch from './src/screens/Watch';
-
+import Home from './src/screens/Home/Home';
+import Watch from './src/screens/watch/Watch';
 import Setting from './src/screens/Setting';
 import Library from './src/screens/Library';
-import {ModalProvider} from './src/context/Contex';
-import useModal from './src/hooks/useModal';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ModalContext} from './src/context/Contex';
 
 function App() {
   const Tab = createBottomTabNavigator();
-  // const watch = useContext(ModalContext);
 
   return (
     <ModalProvider>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
           <Tab.Screen name="Setting" component={Setting} />
           <Tab.Screen name="Library" component={Library} />
         </Tab.Navigator>

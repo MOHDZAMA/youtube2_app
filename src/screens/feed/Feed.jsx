@@ -1,24 +1,17 @@
-import React, {useState, useContext} from 'react';
-import {ModalContext} from '../../context/Contex';
+import React from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
 
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-
-import Watch from '../Watch';
 import Card from './Card';
+
+import {searchData as data} from '../../data/search';
 
 function Feed() {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Card />
+        {data?.items?.map(item => {
+          return <Card item={item} key={item.id.videoId} />;
+        })}
       </ScrollView>
     </View>
   );
@@ -26,13 +19,11 @@ function Feed() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 10,
     display: 'flex',
     height: '100%',
     width: '100%',
-    overflow: 'scroll',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
   },
 });
 

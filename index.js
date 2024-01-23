@@ -10,7 +10,7 @@ import {ModalProvider} from './src/context/Contex';
 const AppWrapper = () => {
   return (
     <ModalProvider>
-      <App />
+      <App style={{flex: 1, backgroundColor: 'black'}} />
     </ModalProvider>
   );
 };

@@ -4,7 +4,8 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import useModal from '../../hooks/useModal';
 import dayjs from 'dayjs';
 import {useNavigation} from '@react-navigation/native';
-function Card({item}) {
+
+function Card2({item}) {
   const {setWatch} = useModal();
   const navigate = useNavigation();
 
@@ -17,18 +18,22 @@ function Card({item}) {
     <View style={styles.card}>
       <TouchableOpacity activeOpacity={1} onPress={() => setWatch(true)}>
         <Image
-          source={{uri: item?.snippet?.thumbnails?.high.url}}
+          source={
+            item?.snippet?.thumbnails?.medium?.url
+              ? {uri: item.snippet.thumbnails.medium.url}
+              : require('../../assets/thumbnail.png')
+          }
           style={styles.card_t_img}
         />
         <View style={styles.card_b}>
           <Image
-            source={require('../../assets/87421.png')}
+            source={require('../../assets/youtube.svg')}
             style={styles.titleimg}
           />
           <View>
             <Text style={styles.text}>
-              {item?.snippet?.title?.length > 50
-                ? item?.snippet?.title.slice(0, 80) + '...'
+              {item?.snippet?.title?.length > 80
+                ? item.snippet.title.slice(0, 80) + '...'
                 : item?.snippet?.title}
             </Text>
             <View style={styles.card_b_b}>
@@ -36,8 +41,7 @@ function Card({item}) {
                 {item?.snippet?.channelTitle}
               </Text>
               <Text>
-                {' '}
-                {dayjs(item?.snippet?.publishTime.slice(0, 10)).format(
+                {dayjs(item?.snippet?.publishTime?.slice(0, 10)).format(
                   'MMM D, YYYY',
                 )}
               </Text>
@@ -51,7 +55,7 @@ function Card({item}) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 300,
+    height: 270,
     width: '100%',
   },
   card_t_img: {
@@ -75,9 +79,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 5,
     marginRight: 5,
-    backgroundColor: 'rgba(225, 225, 225, 0.55)',
-
-    // margin: 5,
+    objectFit: 'cover',
+    backgroundColor: 'gray',
   },
   text: {
     fontSize: 15,
@@ -87,4 +90,4 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.8)',
   },
 });
-export default Card;
+export default Card2;

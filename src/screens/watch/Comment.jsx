@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function Channel() {
+function Comment() {
   return (
     <View>
-      <Text>Channel</Text>
+      <Text>Comment</Text>
     </View>
   );
 }
 
-export default Channel;
+export default Comment;
