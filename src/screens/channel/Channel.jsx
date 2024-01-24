@@ -20,7 +20,7 @@ function Channel() {
         flex: 1,
         width: '100%',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
       }}>
       <View style={{width: '95%'}}>
         <View>
@@ -30,7 +30,7 @@ function Channel() {
             style={{
               width: '100%',
               height: 100,
-              marginTop: 10,
+              // marginTop: 10,
               borderRadius: 10,
             }}
           />

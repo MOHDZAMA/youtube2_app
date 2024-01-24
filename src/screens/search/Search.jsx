@@ -1,11 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-
-import Card from './Card';
-
 import {searchData as data} from '../../data/search';
 
-function Feed() {
+import Card from '../feed/Card';
+
+function Search() {
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -16,7 +15,6 @@ function Feed() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     // paddingTop: 10,
@@ -27,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Feed;
+export default Search;

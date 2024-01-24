@@ -7,16 +7,26 @@ import {useNavigation} from '@react-navigation/native';
 
 function Card2({item}) {
   const {setWatch} = useModal();
-  const navigate = useNavigation();
+  const navigation = useNavigation();
 
   const handleChannelClick = e => {
     e.stopPropagation();
-    navigate.navigate('Channel');
+    setWatch(false);
+    navigation.navigate('Channel');
+  };
+
+  const handleClick = () => {
+    if (item.id.videoId) {
+      setWatch(true);
+    } else if (item.id.playlistId) {
+      setWatch(false);
+      navigation.navigate(`Playlist`);
+    }
   };
 
   return (
-    <View style={styles.card}>
-      <TouchableOpacity activeOpacity={1} onPress={() => setWatch(true)}>
+    <View style={styles.card} key={item?.id?.videoId || item?.id?.playlistId}>
+      <TouchableOpacity activeOpacity={1} onPress={handleClick}>
         <Image
           source={
             item?.snippet?.thumbnails?.medium?.url
@@ -27,7 +37,7 @@ function Card2({item}) {
         />
         <View style={styles.card_b}>
           <Image
-            source={require('../../assets/youtube.svg')}
+            source={require('../../assets/channel1.jpg')}
             style={styles.titleimg}
           />
           <View>
@@ -62,6 +72,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: '100%',
     marginBottom: 5,
+    objectFit: 'fill',
   },
   card_b: {
     display: 'flex',

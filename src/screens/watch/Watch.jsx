@@ -31,6 +31,12 @@ function Watch() {
       },
     }),
   ).current;
+
+  const handleChannelClick = e => {
+    e.stopPropagation();
+    setWatch(false);
+    navigation.navigate('Channel');
+  };
   const {snippet, statistics} = data.items[0];
   return (
     <Modal visible={watch} animationType="fade">
@@ -60,16 +66,17 @@ function Watch() {
           }}>
           <View style={{flexDirection: 'row', gap: 5}}>
             <Image
-              source={require('../../assets/youtube.svg')}
+              source={require('../../assets/channel1.jpg')}
               style={{
                 width: 35,
                 height: 35,
                 borderRadius: 50,
-                backgroundColor: 'red',
               }}
               alt="channel"
             />
-            <Text style={styles.text}>{snippet?.channelTitle}</Text>
+            <Text style={styles.text} onPress={handleChannelClick}>
+              {snippet?.channelTitle}
+            </Text>
             <Text style={styles.text}>1.49M</Text>
           </View>
           <TouchableOpacity style={styles.button}>

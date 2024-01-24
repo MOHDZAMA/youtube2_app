@@ -22,7 +22,10 @@ function Card({item}) {
         />
         <View style={styles.card_b}>
           <Image
-            source={require('../../assets/87421.png')}
+            source={require('../../assets/channel1.jpg')}
+            // source={{
+            // uri: 'https://img.freepik.com/premium-vector/youtube-logo-icon-black-outline-youtube-logo_197792-4748.jpg?w=740',
+            // }}
             style={styles.titleimg}
           />
           <View>
@@ -32,11 +35,12 @@ function Card({item}) {
                 : item?.snippet?.title}
             </Text>
             <View style={styles.card_b_b}>
-              <Text onPress={handleChannelClick}>
+              <Text
+                style={{color: 'rgba(225, 225, 225, 0.5)'}}
+                onPress={handleChannelClick}>
                 {item?.snippet?.channelTitle}
               </Text>
-              <Text>
-                {' '}
+              <Text style={{color: 'rgba(225, 225, 225, 0.5)'}}>
                 {dayjs(item?.snippet?.publishTime.slice(0, 10)).format(
                   'MMM D, YYYY',
                 )}
@@ -51,7 +55,7 @@ function Card({item}) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 300,
+    height: 290,
     width: '100%',
   },
   card_t_img: {
@@ -76,6 +80,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     backgroundColor: 'rgba(225, 225, 225, 0.55)',
+    // objectFit: 'cover',
 
     // margin: 5,
   },

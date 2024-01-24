@@ -11,7 +11,7 @@ function Playlist() {
       style={{
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
       }}>
       <View style={{width: '95%'}}>
         <Image
@@ -38,7 +38,7 @@ function Playlist() {
 
         <ScrollView>
           {playlistvideosData?.items?.map(item => {
-            return <Card5 item={item} />;
+            return <Card5 item={item} key={item.id.videoId} />;
           })}
         </ScrollView>
       </View>

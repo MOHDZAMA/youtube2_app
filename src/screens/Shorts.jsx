@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function Library() {
+function Shorts() {
   return (
     <View>
-      <Text>Library</Text>
+      <Text>Shorts</Text>
     </View>
   );
 }
 
-export default Library;
+export default Shorts;
