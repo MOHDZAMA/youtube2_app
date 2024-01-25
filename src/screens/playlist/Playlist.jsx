@@ -1,11 +1,44 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, ScrollView} from 'react-native';
 import Card5 from './Card5';
 
-import {playlistdetailsData} from '../../data/playlistdetails';
-import {playlistvideosData} from '../../data/playlistvideos';
+// import {playlistdetailsData} from '../../data/playlistdetails';
+// import {playlistvideosData} from '../../data/playlistvideos';
+import useFetch from '../../hooks/useFetch';
 
-function Playlist() {
+function Playlist({route}) {
+  const {id} = route.params;
+
+  const [paramData, setParamData] = useState({
+    playlistId: id,
+    part: 'snippet',
+    maxResults: '50',
+  });
+
+  const [paramData2, setParamData2] = useState({
+    id: id,
+    part: 'snippet',
+  });
+
+  const {
+    data: playlistvideosData,
+    loading,
+    error,
+  } = useFetch('/playlistItems', paramData);
+  const {data: playlistdetailsData} = useFetch('/playlists', paramData2);
+
+  useEffect(() => {
+    setParamData({
+      playlistId: id,
+      part: 'snippet',
+      maxResults: '50',
+    });
+    setParamData2({
+      id: id,
+      part: 'snippet',
+    });
+  }, [id]);
+
   return (
     <View
       style={{

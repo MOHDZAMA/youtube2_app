@@ -5,17 +5,23 @@ import useModal from '../../hooks/useModal';
 import dayjs from 'dayjs';
 import {useNavigation} from '@react-navigation/native';
 function Card({item}) {
-  const {setWatch} = useModal();
+  const {setWatch, setVideoId} = useModal();
   const navigate = useNavigation();
 
   const handleChannelClick = e => {
     e.stopPropagation();
-    navigate.navigate('Channel');
+    navigate.navigate('Channel', {
+      id: item?.snippet?.channelId,
+    });
   };
 
   return (
     <View style={styles.card}>
-      <TouchableOpacity activeOpacity={1} onPress={() => setWatch(true)}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {
+          setWatch(true), setVideoId(item?.id?.videoId);
+        }}>
         <Image
           source={{uri: item?.snippet?.thumbnails?.high.url}}
           style={styles.card_t_img}

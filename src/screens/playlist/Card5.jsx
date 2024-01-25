@@ -6,14 +6,25 @@ import useModal from '../../hooks/useModal';
 import {useNavigation} from '@react-navigation/native';
 
 function Card5({item}) {
-  const {setWatch} = useModal();
+  const {setWatch, setVideoId} = useModal();
   const navigation = useNavigation();
+
+  const handleChannelClick = e => {
+    e.stopPropagation();
+    navigation.navigate(`Channel}`, {
+      id: item?.snippet?.channelId,
+    });
+  };
+
   return (
     <TouchableOpacity
       style={{flexDirection: 'row'}}
       key={item?.id}
       activeOpacity={1}
-      onPress={() => setWatch(true)}>
+      onPress={() => {
+        setVideoId(item?.id?.videoId);
+        setWatch(true);
+      }}>
       <Image
         source={{
           uri: item?.snippet?.thumbnails?.medium?.url || './no-thumbnail.jpg',
@@ -32,7 +43,7 @@ function Card5({item}) {
         </Text>
         <Text
           style={{color: 'rgba(255, 255, 255, 0.7)'}}
-          onPress={() => navigation.navigate('Channel')}>
+          onPress={() => handleChannelClick}>
           {item?.snippet?.channelTitle}
         </Text>
         <Text style={{color: 'rgba(255, 255, 255, 0.7)'}}>

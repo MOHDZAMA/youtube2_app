@@ -9,9 +9,12 @@ import Channel from '../channel/Channel';
 import Feed from '../feed/Feed';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/Entypo';
+import {useNavigation} from '@react-navigation/native';
 
 function Home() {
   const Stack = createNativeStackNavigator();
+  const navigation = useNavigation();
+  const [search, setSearch] = useState('');
 
   function LogoTitle() {
     return (
@@ -30,8 +33,15 @@ function Home() {
         options={{
           headerShadowVisible: false,
           headerTitle: props => <LogoTitle {...props} />,
+
           headerRight: () => (
-            <Icon size={20} color="white" name="search-outline"></Icon>
+            <Icon
+              size={20}
+              color="white"
+              name="search-outline"
+              onPress={() =>
+                navigation.navigate('Search', {query: search})
+              }></Icon>
           ),
           headerStyle: {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -50,25 +60,47 @@ function Home() {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                color: 'white',
-                width: 210,
-                height: 30,
-                borderColor: 'white',
-                padding: 5,
-                paddingLeft: 12,
-                backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                borderRadius: 15,
-                borderWidth: 0.3,
+                gap: 5,
               }}>
-              <TextInput
+              <Icon
+                size={20}
+                color="white"
+                name="arrow-back"
+                onPress={() => {
+                  navigation.goBack(), setSearch('');
+                }}></Icon>
+              <View
                 style={{
-                  width: '90%',
-                  padding: 0,
+                  flexDirection: 'row',
+                  alignItems: 'center',
                   color: 'white',
-                }}
-                placeholderTextColor="white"
-                placeholder="Search"></TextInput>
-              <Icons size={20} color="gray" name="cross"></Icons>
+                  width: 210,
+                  height: 30,
+                  borderColor: 'white',
+                  padding: 5,
+                  paddingLeft: 12,
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  borderRadius: 15,
+                  borderWidth: 0.3,
+                }}>
+                <TextInput
+                  style={{
+                    width: '90%',
+                    padding: 0,
+                    color: 'white',
+                  }}
+                  // autoFocus={true}
+                  // focusable={true}
+                  placeholderTextColor="white"
+                  placeholder="Search"
+                  onChangeText={text => setSearch(text)}
+                  value={search}
+                  onSubmitEditing={() =>
+                    navigation.navigate('Search', {query: search})
+                  }
+                  clearButtonMode="always"></TextInput>
+                <Icons size={20} color="gray" name="cross"></Icons>
+              </View>
             </View>
           ),
           headerRight: () => (
@@ -93,7 +125,13 @@ function Home() {
           headerTintColor: 'gray',
 
           headerRight: () => (
-            <Icon size={20} color="white" name="search-outline"></Icon>
+            <Icon
+              size={20}
+              color="white"
+              name="search-outline"
+              onPress={() =>
+                navigation.navigate('Search', {query: search})
+              }></Icon>
           ),
 
           headerStyle: {
@@ -111,7 +149,13 @@ function Home() {
           headerTintColor: 'gray',
 
           headerRight: () => (
-            <Icon size={20} color="white" name="search-outline"></Icon>
+            <Icon
+              size={20}
+              color="white"
+              name="search-outline"
+              onPress={() =>
+                navigation.navigate('Search', {query: search})
+              }></Icon>
           ),
 
           headerStyle: {

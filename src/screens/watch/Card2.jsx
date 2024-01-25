@@ -6,21 +6,26 @@ import dayjs from 'dayjs';
 import {useNavigation} from '@react-navigation/native';
 
 function Card2({item}) {
-  const {setWatch} = useModal();
+  const {setWatch, setVideoId} = useModal();
   const navigation = useNavigation();
 
   const handleChannelClick = e => {
     e.stopPropagation();
     setWatch(false);
-    navigation.navigate('Channel');
+    setVideoId('');
+    navigation.navigate('Channel', {
+      id: item?.snippet?.channelId,
+    });
   };
 
   const handleClick = () => {
     if (item.id.videoId) {
-      setWatch(true);
+      setVideoId(item.id.videoId), setWatch(true);
     } else if (item.id.playlistId) {
-      setWatch(false);
-      navigation.navigate(`Playlist`);
+      setWatch(false),
+        navigation.navigate(`Playlist`, {
+          id: item.id.playlistId,
+        });
     }
   };
 
