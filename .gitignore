@@ -68,6 +68,6 @@ yarn-error.log
 #environment variable
 .env
 
-utils/
 
-/utils/api
+
+utils/api
