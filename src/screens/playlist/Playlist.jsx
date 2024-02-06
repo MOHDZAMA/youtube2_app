@@ -71,7 +71,9 @@ function Playlist({route}) {
 
         <ScrollView>
           {playlistvideosData?.items?.map(item => {
-            return <Card5 item={item} key={item.id.videoId} />;
+            return (
+              <Card5 item={item} key={item?.snippet?.resourceId?.videoId} />
+            );
           })}
         </ScrollView>
       </View>

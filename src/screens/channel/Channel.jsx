@@ -132,7 +132,7 @@ function Channel({route}) {
           <ScrollView>
             <View className="channel-videos-container">
               {channelvideosData?.items?.map(item => {
-                return <Card3 item={item} />;
+                return <Card3 item={item} key={item.id.videoId} />;
               })}
             </View>
           </ScrollView>

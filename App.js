@@ -22,12 +22,14 @@ function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({route}) => ({
+          tabBarHideOnKeyboard: true,
           tabBarStyle: {
             height: 40,
             backgroundColor: 'rgb(20,20,20)',
             borderTopWidth: 0.2,
             borderTopColor: 'grey',
           },
+
           tabBarIcon: ({focused, color, size}) => {
             if (route.name === 'Home') {
               // iconName = focused

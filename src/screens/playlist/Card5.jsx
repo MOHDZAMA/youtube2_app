@@ -22,8 +22,7 @@ function Card5({item}) {
       key={item?.id}
       activeOpacity={1}
       onPress={() => {
-        setVideoId(item?.id?.videoId);
-        setWatch(true);
+        setVideoId(item?.snippet?.resourceId?.videoId), setWatch(true);
       }}>
       <Image
         source={{

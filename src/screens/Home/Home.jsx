@@ -74,7 +74,7 @@ function Home() {
                   flexDirection: 'row',
                   alignItems: 'center',
                   color: 'white',
-                  width: 210,
+                  width: 250,
                   height: 30,
                   borderColor: 'white',
                   padding: 5,
@@ -99,7 +99,11 @@ function Home() {
                     navigation.navigate('Search', {query: search})
                   }
                   clearButtonMode="always"></TextInput>
-                <Icons size={20} color="gray" name="cross"></Icons>
+                <Icons
+                  size={20}
+                  color="gray"
+                  name="cross"
+                  onPress={() => setSearch('')}></Icons>
               </View>
             </View>
           ),
