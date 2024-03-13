@@ -1,6 +1,11 @@
-import {Dimensions, StyleSheet, View, Text} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+
 import React, {useCallback, useEffect, useImperativeHandle} from 'react';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -9,6 +14,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import Comment from '../screens/watch/Comment';
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
@@ -33,14 +39,15 @@ const BottomSheet = React.forwardRef(({children}, ref) => {
 
   const context = useSharedValue({y: 0});
   const gesture = Gesture.Pan()
-    .onStart(() => {
+    .onBegin(() => {
       context.value = {y: translateY.value};
     })
-    .onUpdate(event => {
+    .onChange(event => {
       translateY.value = event.translationY + context.value.y;
-      translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
+      // translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
+      console.log(translateY.value);
     })
-    .onEnd(() => {
+    .onFinalize(() => {
       if (translateY.value > -SCREEN_HEIGHT / 3) {
         scrollTo(0);
       } else if (translateY.value < -SCREEN_HEIGHT / 1.5) {
@@ -64,9 +71,11 @@ const BottomSheet = React.forwardRef(({children}, ref) => {
 
   return (
     <GestureDetector gesture={gesture}>
-      <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
+      <Animated.View
+        style={[styles.bottomSheetContainer, rBottomSheetStyle]}
+        collapsable={false}>
         <View style={styles.line} />
-        {children}
+        <Comment />
       </Animated.View>
     </GestureDetector>
   );
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     height: SCREEN_HEIGHT,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(0,0,0,0.9)',
     position: 'absolute',
     top: SCREEN_HEIGHT,
     borderRadius: 25,

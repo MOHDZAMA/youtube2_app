@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useRef, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,21 +8,53 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {commentData} from '../../data/comment';
+
 import dayjs from 'dayjs';
-import BottomSheet from '../../components/BottomSheet';
+import {commentData} from '../../data/comment';
 
-import {
-  GestureHandlerRootView,
-  PanGestureHandler,
-} from 'react-native-gesture-handler';
+function Comment() {
+  // const {id} = useParams();
+  const [paramData, setParamData] = useState({
+    part: 'snippet',
+    // videoId: id,
+    maxResults: '100',
+  });
+  // const {
+  // data: commentData,
+  // loading,
+  // error,
+  // } = useFetch("/commentThreads", paramData);
 
-function Comment(inneRef) {
-  console.log(inneRef);
+  useEffect(() => {
+    setParamData({
+      part: 'snippet',
+      // videoId: id,
+      maxResults: '100',
+    });
+  }, []);
   return (
-    <BottomSheet>
-      <View style={{flex: 1, backgroundColor: 'orange'}} />
-    </BottomSheet>
+    <ScrollView>
+      {commentData?.items?.map(({snippet, id}) => (
+        <View style={styles.container}>
+          <Image
+            src={snippet?.topLevelComment?.snippet?.authorProfileImageUrl}
+          />
+          <View>
+            <Text style={styles.text}>
+              {snippet?.topLevelComment?.snippet?.authorDisplayName}
+            </Text>
+            <Text style={styles.text}>
+              {dayjs(
+                snippet?.topLevelComment?.snippet?.publishedAt?.slice(0, 10),
+              ).format('MMM D, YYYY')}
+            </Text>
+            <Text style={styles.text}>
+              {snippet?.topLevelComment?.snippet?.textDisplay}
+            </Text>
+          </View>
+        </View>
+      ))}
+    </ScrollView>
   );
 }
 
@@ -34,9 +66,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#111',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: '#111',
+    padding: 5,
+    color: 'white',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   button: {
     height: 50,
@@ -44,6 +78,9 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     backgroundColor: 'white',
     opacity: 0.6,
+  },
+  text: {
+    color: ' rgba(255, 255, 255, 0.8)',
   },
 });
 

@@ -89,7 +89,7 @@ function Watch() {
     const {snippet, statistics} = data.items[0];
 
     return (
-      <GestureHandlerRootView>
+      <GestureHandlerRootView style={{flex: 1}}>
         <Modal visible={watch} animationType="fade">
           <View
             style={{
@@ -188,9 +188,8 @@ function Watch() {
             </ScrollView>
 
             {/* <Comment ref={ref} /> */}
-            <BottomSheet ref={ref}>
-              <View style={{flex: 1, backgroundColor: 'orange'}} />
-            </BottomSheet>
+            <BottomSheet ref={ref} />
+            {/* <View style={{flex: 1, backgroundColor: 'orange'}} /> */}
           </View>
         </Modal>
       </GestureHandlerRootView>
